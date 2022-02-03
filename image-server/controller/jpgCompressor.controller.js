@@ -4,43 +4,52 @@ const {
   uploadImageToCloudinary,
   deleteFilesFromDirectory,
 } = require("../utils/utils");
-
+const fs = require("fs");
 async function jpgCompress(request, response) {
   let quality = request.params.quality;
   if (!quality) {
     return response.status(500).send("Quality  is missing");
   }
   try {
-    await compress_images(
-      `uploads/${request.file.filename}`,
-      `compressed/images/jpg-compress/`,
-      { compress_force: true, autoupdate: true, statistic: false },
-      false,
-      { jpg: { engine: "mozjpeg", command: ["-quality", quality] } },
-      { png: { engine: false, command: false } },
-      { svg: { engine: false, command: false } },
-      {
-        gif: {
-          engine: false,
-          command: false,
+    if (fs.existsSync("uploads/")) {
+      await compress_images(
+        `uploads/${request.file.filename}`,
+        `compressed/images/jpg-compress/`,
+        { compress_force: true, autoupdate: true, statistic: false },
+        false,
+        { jpg: { engine: "mozjpeg", command: ["-quality", quality] } },
+        { png: { engine: false, command: false } },
+        { svg: { engine: false, command: false } },
+        {
+          gif: {
+            engine: false,
+            command: false,
+          },
         },
-      },
-      function (error, completed) {
-        console.log("-------------");
-        console.log(error);
-        console.log(completed);
-        console.log("-------------");
-        if (error) {
-          return response.status(500).send("Something went wrong");
-        } else if (completed) {
-          uploadImageToCloudinary(
-            response,
-            `compressed/images/jpg-compress/${request.file.filename}`
-          );
-          deleteFilesFromDirectory(request.file);
+        function (error, completed) {
+          console.log("-------------");
+          console.log(error);
+          console.log(completed);
+          console.log("-------------");
+          if (error) {
+            return response.status(500).send("Something went wrong");
+          } else if (completed) {
+            uploadImageToCloudinary(
+              response,
+              `compressed/images/jpg-compress/${request.file.filename}`
+            );
+            deleteFilesFromDirectory(request.file);
+          }
         }
-      }
-    );
+      );
+    } else {
+      fs.mkdir(dir, (err) => {
+        if (err) {
+          throw err;
+        }
+        console.log("Directory is created.");
+      });
+    }
   } catch (error) {
     console.log(error);
     return response.status(503).send("Something went wrong");
