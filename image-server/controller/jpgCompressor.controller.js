@@ -43,7 +43,7 @@ async function jpgCompress(request, response) {
         }
       );
     } else {
-      fs.mkdir(dir, (err) => {
+      fs.mkdir("uploads/", (err) => {
         if (err) {
           throw err;
         }
