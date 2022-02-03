@@ -1,0 +1,8 @@
+File from: [uploads/63333707.png-1642482459472.png]
+
+File to: [compressed/images/jpg-compress/63333707.png-1642482459472.png]
+
+Compression algorithm: [pngquant]
+
+Description: Error: Command failed: D:\Web-development\image-compression\image-server\node_modules\pngquant-bin\vendor\pngquant.exe --quality=89-109 uploads/63333707.png-1642482459472.png
+Quality should be in format min-max where min and max are numbers in range 0-100.

@@ -1,0 +1,8 @@
+File from: [uploads/undefined-1643611962532.jpg]
+
+File to: [compressed/images/jpg-compress/undefined-1643611962532.jpg]
+
+Compression algorithm: [mozjpeg]
+
+Description: Error: Command failed: D:\Web-development\image-compression\image-server\node_modules\mozjpeg\vendor\cjpeg.exe -quality 80 -outfile compressed/images/jpg-compress/undefined-1643611962532.jpg uploads/undefined-1643611962532.jpg
+Unrecognized input file format --- perhaps you need -targa
