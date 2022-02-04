@@ -15,7 +15,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 const limiter = rateLimiter({
-  max: 2,
+  max: 5,
   windowMs: 1 * 60 * 1000,
   handler: function (req, res, next) {
     return res.status(429).json({
